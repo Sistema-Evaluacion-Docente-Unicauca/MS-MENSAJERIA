@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: mensajeria
+  mail:
+    host: ${SPRING_MAIL_HOST}
+    port: ${SPRING_MAIL_PORT}
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
+
+server:
+  port: 8081
+
+logging:
+  level:
+    root: ${LOG_LEVEL_ROOT:INFO}
+    'co.edu.unicauca.mensajeria': ${LOG_LEVEL_API:DEBUG}
+  file:
+    name: ${LOG_FILE_NAME:logs/mensajeria.log}
+  logback:
+    rollingpolicy:
+      max-file-size: ${LOG_FILE_MAX_SIZE:10MB}
+      max-history: ${LOG_FILE_MAX_HISTORY:5}
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+
