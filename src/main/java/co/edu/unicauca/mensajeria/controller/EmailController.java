@@ -12,7 +12,7 @@ import co.edu.unicauca.mensajeria.dto.EmailRequest;
 import co.edu.unicauca.mensajeria.service.EmailService;
 
 @RestController
-@RequestMapping("/mensajeria")
+@RequestMapping("api/mensajeria")
 public class EmailController {
 
     private static final Logger logger = LoggerFactory.getLogger(EmailController.class);
@@ -20,7 +20,7 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    @PostMapping("enviarEmail")
+    @PostMapping("enviar-email")
     public ResponseEntity<Boolean> enviarCorreoConAnexos(@RequestBody EmailRequest request) {
         logger.info("Recibiendo solicitud para enviar correo a: {}", request.getCorreos());
 
