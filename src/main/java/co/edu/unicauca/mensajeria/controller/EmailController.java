@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,7 @@ public class EmailController {
     @Operation(
         summary = "Enviar correo electrónico con anexos",
         description = "Permite enviar un correo electrónico a múltiples destinatarios, incluyendo documentos adjuntos.",
-        requestBody = @RequestBody(
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
             required = true,
             description = "Datos del correo a enviar",
             content = @Content(
@@ -48,16 +47,17 @@ public class EmailController {
             )
         }
     )
-    public ResponseEntity<Boolean> enviarCorreoConAnexos(@RequestBody EmailRequest request) {
+    public ResponseEntity<Boolean> enviarCorreoConAnexos(
+            @org.springframework.web.bind.annotation.RequestBody EmailRequest request) {
+
         logger.info("Recibiendo solicitud para enviar correo a: {}", request.getCorreos());
 
         try {
             boolean exito = emailService.enviarCorreoConAnexos(
-                request.getCorreos(),
-                request.getAsunto(),
-                request.getMensaje(),
-                request.getDocumentos()
-            );
+                    request.getCorreos(),
+                    request.getAsunto(),
+                    request.getMensaje(),
+                    request.getDocumentos());
 
             if (exito) {
                 logger.info("Correo electrónico enviado correctamente a: {}", request.getCorreos());
